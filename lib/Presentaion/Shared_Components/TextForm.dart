@@ -43,11 +43,14 @@ Widget TextFormWidget(
                     color: ColorManager.DarkGrayColor,
                   ),
                 )
-              : Icon(
-                  icon,
-                  size: 30,
-                  color: ColorManager.DarkGrayColor,
-                ),
+              : InkWell(
+              onTap: ontap,
+                child: Icon(
+                    icon,
+                    size: 30,
+                    color: ColorManager.DarkGrayColor,
+                  ),
+              ),
         ),
 //حاله الفورم لو ضغط عليها
         focusedBorder: OutlineInputBorder(
@@ -114,4 +117,47 @@ Widget TextFormWithoutIcon({
       ),
     ),
   );
+}
+
+Widget TextFormWithoutBord (
+{
+  BuildContext? context,
+  String? hint ,
+  TextEditingController? controller,
+}
+    ){
+  return  TextFormField(
+      validator: (value) {
+        if (value!.isEmpty)
+          return "  ";
+        else
+          return null;
+      },
+      keyboardType: TextInputType.number ,
+      controller: controller,
+      cursorColor: ColorManager.GrayColor,
+      style: Theme.of(context!).textTheme.bodyText1,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: ColorManager.LightGrayColor,
+        //استايل الكلام الخفي
+        hintText: " ${ hint ?? " "}",
+        hintStyle: Theme.of(context!).textTheme.bodyText2,
+        //حاله الفورم لو ضغط عليها
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorManager.LightGrayColor,
+          ),
+        ),
+        // حاله الفورم لو مضغطش
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorManager.LightGrayColor,
+          ),
+        ),
+      )
+  );
+
+
+
 }

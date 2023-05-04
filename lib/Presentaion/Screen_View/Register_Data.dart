@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/Auth_Fisrt.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/Common_Button.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/TextForm.dart';
+import 'package:tab_cash/Resource/RouteGenerator.dart';
 import 'package:tab_cash/Resource/Theme.dart';
 
 import '../../Resource/Color_Manager.dart';
@@ -16,11 +17,14 @@ class _RegisterDataState extends State<RegisterData> {
   TextEditingController? FirstName = TextEditingController();
   TextEditingController? LastName = TextEditingController();
   TextEditingController? Email = TextEditingController();
-  //اليوزر الي هيختاره
+  //Data of Type of user from dropdownbuttton
   String? Type;
   final ItemsList = ["Parent", "Child"];
+  // for validation
+  var FormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    // Function return DropdownMenuItem to show in menu of DroPdown
     DropdownMenuItem<String> BuildDropMenuItem(String Item) => DropdownMenuItem(
         value: Item,
         child: Text(
@@ -43,7 +47,7 @@ class _RegisterDataState extends State<RegisterData> {
             child: SingleChildScrollView(
               child: Container(
                 width: GetWidth(context) * 0.9,
-                height: GetHeight(context) * 0.7,
+                height: GetHeight(context) * 0.8,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: ColorManager.LightGrayColor),
@@ -53,16 +57,24 @@ class _RegisterDataState extends State<RegisterData> {
                         context, "Register", "assets/images/register.png",
                         Text2:
                             "input a valid password to complete\n               registration Process"),
-                    TextFormWithoutIcon(
-                        controller: FirstName,
-                        txt: "First Name",
-                        context: context),
-                    TextFormWithoutIcon(
-                        controller: LastName,
-                        txt: "LastName",
-                        context: context),
-                    TextFormWithoutIcon(
-                        controller: Email, txt: "Email", context: context),
+                    Spacer(),
+                    Form(
+                      key: FormKey,
+                      child: Column(
+                        children: [
+                          TextFormWithoutIcon(
+                              controller: FirstName,
+                              txt: "First Name",
+                              context: context),
+                          TextFormWithoutIcon(
+                              controller: LastName,
+                              txt: "LastName",
+                              context: context),
+                          TextFormWithoutIcon(
+                              controller: Email, txt: "Email", context: context),
+                        ],
+                      ),
+                    ),
                     Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Stack(
@@ -70,7 +82,7 @@ class _RegisterDataState extends State<RegisterData> {
                             Container(
                               padding: EdgeInsets.all(10.0),
                               width: double.infinity,
-                              height: 60,
+                              height: GetHeight(context)*0.07,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 1,
@@ -108,7 +120,14 @@ class _RegisterDataState extends State<RegisterData> {
                                 : SizedBox()
                           ],
                         )),
-                    CommonButton(context, "Continue", () {})
+                    Spacer(),
+                    CommonButton(context, "Continue", () {
+                      if (FormKey.currentState!.validate())
+                        {
+                        Navigator.pushReplacementNamed(context, RouteGenerator.LogInScreen);
+                        }
+                    }),
+                    Spacer(),
                   ],
                 ),
               ),
@@ -117,31 +136,4 @@ class _RegisterDataState extends State<RegisterData> {
         ],
       ),
     );
-  }
-
-//   void showPopupMenu() async {
-//     await showMenu(
-//       color: ColorManager.LightGrayColor,
-//         context: context,
-//         position: RelativeRect.fromLTRB(0, 100, 100, 100),
-//         items: [
-//     PopupMenuItem(
-//     value: 1 ,
-//     child: Text("Parents",style: Theme.of(context).textTheme.bodyText2,),
-//     ),
-//     PopupMenuItem(
-//     value: 2,
-//     child: Text("Child",style: Theme.of(context).textTheme.bodyText2,),
-//     ),
-//     ],
-//     elevation: 8.0,
-//     ).then((value){
-//
-// // NOTE: even you didnt select item this method will be called with null of value so you should call your call back with checking if value is not null
-//
-//     if(value!=null)
-//     print(value);
-//
-//     });
-//   }
-}
+  } }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tab_cash/Presentaion/Screen_View/Register_Data.dart';
+import 'package:tab_cash/Resource/RouteGenerator.dart';
 import 'package:tab_cash/Resource/Theme.dart';
 
 void main() {
@@ -17,7 +18,8 @@ class TabCash extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
      theme: ThemeApp,
-     home: RegisterData(),
+     initialRoute: RouteGenerator.RegPhoneScreen,
+     onGenerateRoute: RouteGenerator.getRoute,
     );
   }
 }
