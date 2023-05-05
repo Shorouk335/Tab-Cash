@@ -19,6 +19,7 @@ dynamic GetWidth (BuildContext context){
   textTheme: TextTheme(
     bodyText1: txtStyle(ColorManager.DarkGrayColor, 20.0, false),
     bodyText2: txtStyle(ColorManager.GrayColor, 15.0, false),
+
   ),
 
 );

@@ -142,7 +142,7 @@ Widget TextFormWithoutBord (
         fillColor: ColorManager.LightGrayColor,
         //استايل الكلام الخفي
         hintText: " ${ hint ?? " "}",
-        hintStyle: Theme.of(context!).textTheme.bodyText2,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
         //حاله الفورم لو ضغط عليها
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(

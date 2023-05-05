@@ -5,7 +5,7 @@ import 'package:tab_cash/Presentaion/Shared_Components/TextForm.dart';
 import 'package:tab_cash/Resource/RouteGenerator.dart';
 import 'package:tab_cash/Resource/Theme.dart';
 
-import '../../Resource/Color_Manager.dart';
+import '../../../../Resource/Color_Manager.dart';
 
 class RegisterData extends StatefulWidget {
   @override

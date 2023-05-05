@@ -72,7 +72,6 @@ class _RegisterPhoneState extends State<RegisterPhone> {
                         ),
                     ),
                       ),
-
                     CommonButton(context, "Continue", () {
                       if (FormKey.currentState!.validate())
                       {
