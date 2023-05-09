@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:tab_cash/Presentaion/Shared_Components/Auth_Fisrt.dart';
+import 'package:tab_cash/Presentaion/Shared_Components/Common_Register_Login_Widgets.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/Common_Button.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/TextForm.dart';
 import 'package:tab_cash/Resource/Color_Manager.dart';
@@ -37,19 +37,21 @@ class _VerificationState extends State<Verification> {
             child: SingleChildScrollView(
               child: Container(
                 width: GetWidth(context) * 0.9,
-                height: GetHeight(context) * 0.5,
+                height: GetHeight(context) * 0.6,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: ColorManager.LightGrayColor),
                 child: Column(
                   children: [
-                    AuthFirstWidgets(
+                    //Img + text1+ text2
+                    Common_Register_Login_Widgets(
                         context, "Verification", "assets/images/verification.png",
                         Text2: "Please Enter The Code was send to\n                your Phone number"
                     ),
-                    Spacer(),
+                    SizedBox(height: 42,),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(right: 24, left: 24),
+                      //Box of varifaction number
                       child: Form(
                         key: FormKey,
                         child: Row(
@@ -63,10 +65,12 @@ class _VerificationState extends State<Verification> {
                         ),
                       )
                             ),
+                    SizedBox(height: 15,),
+                    //Button of continue
                     CommonButton(context, "Continue", () {
                       if (FormKey.currentState!.validate())
                       {
-                        Navigator.pushReplacementNamed(context, RouteGenerator.RegDataScreen);
+                        Navigator.pushReplacementNamed(context, RouteGenerator.SetPasswordScreen);
 
                       }
                     }),
@@ -85,16 +89,10 @@ class _VerificationState extends State<Verification> {
 
   }
   Widget BoxNumber (TextEditingController con){
-    return Container(
-      width: GetWidth(context)/6,
-      height: GetHeight(context)*0.06,
-      decoration: BoxDecoration(
-          border: Border.all(
-              width: 1,
-              color: ColorManager.DarkGrayColor),
-          borderRadius: BorderRadius.circular(15.0),
-          color: ColorManager.LightGrayColor),
-      child: Center(child: TextFormWithoutBord(context: context ,controller: con)),
+    return Container( 
+      width:68,// GetWidth(context)/6,
+      height:46,// GetHeight(context)*0.06,
+      child: TextFormWithoutBord(context: context ,controller: con),
     );
 
 

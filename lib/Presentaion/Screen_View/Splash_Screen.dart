@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tab_cash/Resource/RouteGenerator.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-
 import '../../Resource/Color_Manager.dart';
-import '../../Resource/String_Manager.dart';
 import '../../Resource/Theme.dart';
 
 // Page start at the begin of application
@@ -15,10 +12,10 @@ class Splach extends StatefulWidget {
 
 class _SplachState extends State<Splach> {
   @override
-  //delay for 4 sec only Then go to next page
+ // delay for 1 sec only Then go to next page
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1,microseconds: 5000), () {
         Navigator.pushReplacementNamed(context,RouteGenerator.OnBoardingScreen);
     });
   }
@@ -28,18 +25,20 @@ class _SplachState extends State<Splach> {
       backgroundColor: ColorManager.DarkGrayColor,
       body: Stack(
           children: [
+        //BackGround IMg
         Image.asset(
           "assets/images/Splash.png",
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
         ),
-            Positioned(
-                top: GetHeight(context)*0.35,
+        //Applicattion Name
+        Positioned(
+                top:GetHeight(context)*0.38,
                 left: GetWidth(context)*0.3,
                 child : Text ( "Tap Cash" ,style: txtStyle(
                   ColorManager.OrangeColor ,
-                  40.0 ,
+                  45.0 ,
                   true
 
                 )

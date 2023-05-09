@@ -21,10 +21,10 @@ class AfterOnBoarding extends StatelessWidget {
       img: "assets/images/bo3.png",
       title: StringManager.onBordTitle3,
       disc: StringManager.onBordDis3,
-      Hsize: 2.5,
+      Hsize: 3,
     ),
   ];
-
+ //Function return IMG & title &  description
   Widget Content(BuildContext context) {
     return Container(
       height: GetHeight(context)*0.6,
@@ -53,14 +53,15 @@ class AfterOnBoarding extends StatelessWidget {
           child: Column(
               children: [
             Content(context),
+            SizedBox(height: 48,),
+            //Button of Sign in
             CommonButton(context, "Sign in", () {
                 Navigator.pushReplacementNamed(
                     context, RouteGenerator.LogInScreen);
             }),
-            SizedBox(
-              height: 10,
-            ),
-            CommonButtonTransparent(context, "Register Now", () {
+            SizedBox(height: 10,),
+                //Button of Register Now
+                CommonButtonTransparent(context, "Register Now", () {
                 Navigator.pushReplacementNamed(
                     context, RouteGenerator.RegPhoneScreen);
 

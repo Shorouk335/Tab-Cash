@@ -25,20 +25,18 @@ class _OnBoardingState extends State<OnBoarding> {
   //List of Data of 3 pages from class pageViewModel
   List<PageViewModel> PageViewData = [
     PageViewModel(
-      img: "assets/images/bo1.png",
-      title: StringManager.onBordTitle1,
-      disc: StringManager.onBordDis1,
-      Hsize: 3,
-    ),
+        img: "assets/images/bo1.png",
+        title: StringManager.onBordTitle1,
+        disc: StringManager.onBordDis1,
+        Hsize: 3,
+        button: "Skip"),
     PageViewModel(
-      img: "assets/images/bo2.png",
-      title: StringManager.onBordTitle2,
-      disc: StringManager.onBordDis2,
-      Hsize: 3,
-    ),
-
+        img: "assets/images/bo2.png",
+        title: StringManager.onBordTitle2,
+        disc: StringManager.onBordDis2,
+        Hsize: 3,
+        button: "Next"),
   ];
-
 
   // 2 Dots move with pageView Widget by controller in pageView widgets
   Widget Dots() {
@@ -48,38 +46,14 @@ class _OnBoardingState extends State<OnBoarding> {
       effect: ExpandingDotsEffect(
         activeDotColor: ColorManager.OrangeColor,
         dotColor: ColorManager.GrayColor,
-        dotHeight: 10,
-        dotWidth: 15,
+        dotHeight: 5,
+        dotWidth: 20,
         expansionFactor: 2,
         spacing: 5,
       ),
     );
   }
-
-  //Skip & Next Botton
-  Widget Bottons(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: InkWell(
-          onTap: () {
-            Navigator.pushReplacementNamed(context, RouteGenerator.afterBoardingScreen);
-          },
-          child: Text(
-            "Next" ,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-              decoration: TextDecoration.underline,
-
-            ),
-
-          ),
-        ),
-      ),
-
-    ]);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -88,30 +62,30 @@ class _OnBoardingState extends State<OnBoarding> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-              children: [
-                (indexPageView ==1)?
-            Bottons(context): SizedBox( height: GetHeight(context)*0.04),
+          child: Column(children: [
+            //ImG + title +discription
             Container(
-              height: GetHeight(context)*0.6,
+              height: GetHeight(context) * 0.6,
               child: PageView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: PageViewData.length,
                 itemBuilder: (context, index) {
-                  return PageViewItem(context: context, model: PageViewData[index]);
+                  return PageViewItem(
+                      context: context, model: PageViewData[index]);
                 },
                 controller: controller,
                 physics: BouncingScrollPhysics(),
                 onPageChanged: (index) {
-                   setState(() {
-                     indexPageView = index;
-
-                   });
+                  setState(() {
+                    indexPageView = index;
+                  });
                 },
               ),
             ),
+            Spacer(),
+            //dots
             Dots(),
-
+            Spacer(),
           ]),
         ),
       ),

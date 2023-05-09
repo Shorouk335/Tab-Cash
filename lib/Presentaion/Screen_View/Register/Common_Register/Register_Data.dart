@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tab_cash/Presentaion/Shared_Components/Auth_Fisrt.dart';
+import 'package:tab_cash/Presentaion/Shared_Components/Common_Register_Login_Widgets.dart';
+import 'package:tab_cash/Presentaion/Shared_Components/Awesom_Dialog.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/Common_Button.dart';
 import 'package:tab_cash/Presentaion/Shared_Components/TextForm.dart';
 import 'package:tab_cash/Resource/RouteGenerator.dart';
@@ -53,41 +54,44 @@ class _RegisterDataState extends State<RegisterData> {
                     color: ColorManager.LightGrayColor),
                 child: Column(
                   children: [
-                    AuthFirstWidgets(
+                    Common_Register_Login_Widgets(
                         context, "Register", "assets/images/register.png",
-                        Text2:
-                            "input a valid password to complete\n               registration Process"),
-                    Spacer(),
-                    Form(
-                      key: FormKey,
-                      child: Column(
-                        children: [
-                          TextFormWithoutIcon(
-                              controller: FirstName,
-                              txt: "First Name",
-                              context: context),
-                          TextFormWithoutIcon(
-                              controller: LastName,
-                              txt: "LastName",
-                              context: context),
-                          TextFormWithoutIcon(
-                              controller: Email, txt: "Email", context: context),
-                        ],
+                      ),
+                    SizedBox(height: 15,),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 14,left: 14),
+                      child: Form(
+                        key: FormKey,
+                        child: Column(
+                          children: [
+                            TextFormWithoutIcon(
+                                controller: FirstName,
+                                txt: "First Name",
+                                context: context),
+                            TextFormWithoutIcon(
+                                controller: LastName,
+                                txt: "Last Name",
+                                context: context),
+                            TextFormWithoutIcon(
+                                controller: Email, txt: "Email", context: context),
+                          ],
+                        ),
                       ),
                     ),
+                    SizedBox(height: 8,),
                     Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(right: 24,left: 24),
                         child: Stack(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(10.0),
+                             padding: EdgeInsets.all(10.0),
                               width: double.infinity,
                               height: GetHeight(context)*0.07,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 1,
                                       color: ColorManager.DarkGrayColor),
-                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderRadius: BorderRadius.circular(18.0),
                                   color: ColorManager.LightGrayColor),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
@@ -120,13 +124,28 @@ class _RegisterDataState extends State<RegisterData> {
                                 : SizedBox()
                           ],
                         )),
-                    Spacer(),
-                    CommonButton(context, "Continue", () {
+                    SizedBox(height: 15,),
+                    CommonButton(context, "Register", () {
                       if (FormKey.currentState!.validate())
                         {
-                        Navigator.pushReplacementNamed(context, RouteGenerator.LogInScreen);
+                          if (Type == "Parent")
+                            {
+                              ShowCorrectDialog(context ,
+                                img: "assets/images/correct.png",
+                                txt: "Congratulations your Account\n has been Created "
+                            );
+                              Future.delayed(Duration(seconds: 1,microseconds: 500), () {
+                                Navigator.pushReplacementNamed(context, RouteGenerator.HomePageScreen);
+
+                              }
+                              );
+                            }
+                          else {
+                            Navigator.pushReplacementNamed(context, RouteGenerator.RegPhoneParentScreen);
+
+                          }
                         }
-                    }),
+                    } ),
                     Spacer(),
                   ],
                 ),

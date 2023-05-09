@@ -5,16 +5,16 @@ import 'package:tab_cash/Presentaion/Shared_Components/TextForm.dart';
 import 'package:tab_cash/Resource/Color_Manager.dart';
 import 'package:tab_cash/Resource/RouteGenerator.dart';
 import 'package:tab_cash/Resource/Theme.dart';
-class LogIn extends StatefulWidget {
+class SetPassword extends StatefulWidget {
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SetPassword> createState() => _SetPasswordState();
 }
 
-class _LogInState extends State<LogIn> {
-  // Data of Login
-  TextEditingController? PhoneNumber = TextEditingController();
+class _SetPasswordState extends State<SetPassword> {
+  // Data of Set Password
   TextEditingController? Password = TextEditingController();
-  //FormKey to Validation on TextForm
+  TextEditingController? Confirm_Password = TextEditingController();
+
   var FormKey = GlobalKey<FormState>();
 
   @override
@@ -26,7 +26,7 @@ class _LogInState extends State<LogIn> {
         children: [
           //Image of Background
           Image.asset(
-            "assets/images/cover2.png",
+            "assets/images/cover1.png",
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
@@ -42,53 +42,45 @@ class _LogInState extends State<LogIn> {
                     color: ColorManager.LightGrayColor),
                 child: Column(
                   children: [
-                    //Text1+Img
                     Common_Register_Login_Widgets(
-                        context, "Log In", "assets/images/login.png",),
-                    SizedBox(height: 20,),
-                    //Text Form of Phone Number & Password
+                      context, "Set your Password", "assets/images/password.png",
+                    Text2: "input a valid password to complete\n registration Process"
+                    ),
+                    SizedBox(height: 10,),
                     Padding(
                       padding: const EdgeInsets.only(right: 14, left: 14),
                       child: Form(
-                         key: FormKey,
+                          key: FormKey,
                           child: Column(
-                        children: [
-                          TextFormWidget(
-                            context: context ,
-                            txt: "Phone Number " ,
-                            controller: PhoneNumber ,
-                            password: false ,
-                            icon: Icons.phone,
-                            ontap: (){}
-                          ),
-                          TextFormWidget(
-                              context: context ,
-                              txt: "Password " ,
-                              controller: Password ,
-                              password: false ,
-                              icon: Icons.lock_open,
-                              ontap: (){}
-                          )
+                            children: [
+                              TextFormWidget(
+                                  context: context ,
+                                  txt: "Password" ,
+                                  controller: Password ,
+                                  password: true ,
+                                  icon: Icons.lock_open,
+                                  ontap: (){}
+                              ),
+                              TextFormWidget(
+                                  context: context ,
+                                  txt: "Confirm Password" ,
+                                  controller: Confirm_Password ,
+                                  password: true ,
+                                  icon: Icons.lock_open,
+                                  ontap: (){}
+                              )
 
-                        ],
-                      )),
+                            ],
+                          )),
                     ),
                     Spacer(),
-                    //Button of Sign In
-                    CommonButton(context, "Sign In", () {
+                    CommonButton(context, "Continue", () {
                       if (FormKey.currentState!.validate())
                       {
-                        Navigator.pushReplacementNamed(context, RouteGenerator.HomePageScreen);
+                        Navigator.pushReplacementNamed(context, RouteGenerator.RegDataScreen);
 
                       }
-                    } ),
-                    Spacer(),
-                    //Button Of Forget Password
-                    Center(child: Text("Forget Password?",
-                        style:
-                    Theme.of(context).textTheme.bodyText2!.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),),),
+                    }),
                     Spacer(),
                   ],
                 ),
